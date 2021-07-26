@@ -1,16 +1,19 @@
 [user]
 	name = giovanism
 	email = giovanmail@gmail.com
-	signingkey = B8C26D20D1BF81E113708ABAA16DB41E6706C8E4
+	signingkey = ED33879991D37D938A93909FA492145350694554
 
 [core]
 	editor = nvim
 	pager = less -iXFR
-
-[credential]
-	helper = cache --timeout 7200
-
 [commit]
 	gpgsign = true
 [color "diff"]
 	whitespace = red reverse
+[credential]
+	helper = manager-core
+	cacheOptions = --timeout 300
+	gitHubAuthModes = oauth
+	credentialStore = gpg
+[credential "https://dev.azure.com"]
+	useHttpPath = true
