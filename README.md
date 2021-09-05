@@ -7,5 +7,5 @@ Personal dotfiles repository
 ### zsh
 
 ```sh
-stow -t $HOME zsh
+stow --dotfiles -t $HOME zsh
 ```
