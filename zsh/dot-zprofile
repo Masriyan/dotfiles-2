@@ -3,7 +3,7 @@ export EDITOR=nvim
 
 # Go development
 export GOPATH=$HOME/.go
-if [ "$OSTYPE" == "darwin"* ]; then
+if [ $(uname) = "Darwin" ]; then
   export GOROOT="$(brew --prefix golang)/libexec"
 fi
 
