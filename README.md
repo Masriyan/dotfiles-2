@@ -10,6 +10,12 @@ Personal dotfiles repository
 stow -t $(dirname $(dirname $(bat --config-file))) bat
 ```
 
+### git
+
+```sh
+stow --dotfiles -t $HOME git
+```
+
 ### tmux
 
 ```sh

@@ -1,19 +1,25 @@
 [user]
-	name = giovanism
+	name = Giovan Isa Musthofa
 	email = giovanmail@gmail.com
 	signingkey = ED33879991D37D938A93909FA492145350694554
 
 [core]
 	editor = nvim
 	pager = less -iXFR
+
 [commit]
 	gpgsign = true
+
 [color "diff"]
 	whitespace = red reverse
+
 [credential]
-	helper = manager-core
-	cacheOptions = --timeout 300
-	gitHubAuthModes = oauth
-	credentialStore = gpg
+	helper =
+	helper = /usr/local/share/gcm-core/git-credential-manager-core
+
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+
+; include for all repositories inside ~/Work/
+[includeIf "gitdir:~/Work/"]
+	path = ~/.gitconfig.work
