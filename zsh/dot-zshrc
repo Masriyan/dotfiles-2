@@ -81,7 +81,6 @@ plugins=(
 	kube-ps1
 	shrink-path
 	tmux
-	zsh-autosuggestions
 )
 
 # plugins configuration variables
