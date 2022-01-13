@@ -120,6 +120,12 @@ export KUBECTL_EXTERNAL_DIFF="colordiff -u -N"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi=nvim
 alias vim=nvim
+GLOBALIAS_FILTER_VALUES=(
+	l
+	ls
+	la
+	grep
+)
 
 # Misc
 # Miscelaneous interactive zsh environment variable fixes
