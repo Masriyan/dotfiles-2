@@ -10,6 +10,12 @@ Personal dotfiles repository
 stow -t $(dirname $(dirname $(bat --config-file))) bat
 ```
 
+### nvim
+
+```sh
+stow -t $XDG_CONFIG_HOME nvim
+```
+
 ### git
 
 ```sh
