@@ -38,10 +38,22 @@ cmp.setup({
 })
 
 -- nvim-go
-require('go').config.update_tool('quicktype', function(tool)
-    tool.pkg_mgr = 'npm'
-end)
+-- First time only need to install quicktype with npm
+-- require('go').config.update_tool('quicktype', function(tool)
+--     tool.pkg_mgr = 'npm'
+-- end)
 require('go').setup({})
+
+
+-- null-ls
+local null_ls = require("null-ls")
+null_ls.setup({
+    sources = {
+        null_ls.builtins.diagnostics.eslint, -- eslint or eslint_d
+        null_ls.builtins.code_actions.eslint, -- eslint or eslint_d
+        null_ls.builtins.formatting.prettier -- prettier, eslint, eslint_d, or prettierd
+    },
+})
 
 local nvim_lsp = require('lspconfig')
 
@@ -75,7 +87,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -83,7 +94,7 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls' }
+local servers = { 'gopls', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
