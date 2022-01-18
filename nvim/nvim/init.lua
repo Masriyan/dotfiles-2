@@ -37,6 +37,18 @@ cmp.setup({
   }
 })
 
+-- nvim-tree
+vim.g.nvim_tree_show_icons = {
+  git = 0,
+  folders = 0,
+  files = 0,
+  folder_arrows = 0,
+}
+require('nvim-tree').setup({
+  disable_netrw       = false,
+  hijack_netrw        = false,
+})
+
 -- nvim-go
 -- First time only need to install quicktype with npm
 -- require('go').config.update_tool('quicktype', function(tool)

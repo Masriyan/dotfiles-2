@@ -24,6 +24,8 @@ return require('packer').startup(function(use)
     }
   }
 
+  use 'kyazdani42/nvim-tree.lua'
+
   use { 'crispgm/nvim-go',
     requires = {
       'nvim-lua/plenary.nvim',
