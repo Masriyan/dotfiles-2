@@ -126,7 +126,6 @@ cmd [[colorscheme pablo]]
 local o = vim.o
 
 o.number = true
-o.relativenumber = true
 o.textwidth = 80
 o.mouse = "a"
 o.colorcolumn = "80,120"
