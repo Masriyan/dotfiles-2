@@ -77,9 +77,10 @@ plugins=(
 	gcloud
 	git
 	globalias
-	kubectl
 	kube-ps1
+	kubectl
 	shrink-path
+	terraform
 	tmux
 )
 
