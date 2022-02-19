@@ -75,12 +75,29 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'tsserver', 'sumneko_lua' }
-for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
+local lspconfig = require('lspconfig')
+
+local servers = { 'gopls', 'tsserver' }
+for _, server in pairs(servers) do
+  lspconfig[server].setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
-    }
+    },
   }
 end
+
+-- Setup lua language server for neovim itself
+local luadev = require("lua-dev").setup({
+  -- add any options here, or leave empty to use the default settings
+  lspconfig = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 150,
+    },
+  },
+})
+lspconfig.sumneko_lua.setup(luadev)
+
