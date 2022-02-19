@@ -2,17 +2,14 @@ require('plugins')
 require('lsp')
 
 -- Colorscheme
-local cmd = vim.cmd
-cmd [[colorscheme pablo]]
+vim.cmd [[colorscheme tokyonight]]
 
--- Options
-local o = vim.o
-
-o.number = true
-o.textwidth = 80
-o.mouse = "a"
-o.colorcolumn = "80,120"
-o.smarttab = true
+-- Option
+vim.o.number = true
+vim.o.textwidth = 80
+vim.o.mouse = 'a'
+vim.o.colorcolumn = '80,120'
+vim.o.smarttab = true
 
 -- Keybindings using which-key
 local wk = require('which-key')
