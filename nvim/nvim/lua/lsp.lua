@@ -19,12 +19,12 @@ null_ls.setup({
 
 
 -- Map following keys to no particular buffer
--- See `:help vim.lsp.*` for documentation on any of the below functions
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
 wk.register({
-  ['<space>e'] = {'<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', 'Show line diagnostics'},
-  ['[d'] = {'<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', 'Go to diagnostic prev'},
-  [']d'] = {'<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', 'Go to diagnostic next'},
-  ['<space>q'] = {'<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', 'Set diagnostic loclist'},
+  ['<space>e'] = {'<cmd>lua vim.diagnostic.open_float()<CR>', 'Show diagnostics'},
+  ['[d'] = {'<cmd>lua vim.diagnostic.goto_prev()<CR>', 'Go to diagnostic prev'},
+  [']d'] = {'<cmd>lua vim.diagnostic.goto_next()<CR>', 'Go to diagnostic next'},
+  ['<space>q'] = {'<cmd>lua vim.diagnostic.setloclist()<CR>', 'Set diagnostic loclist'},
 })
 
 -- Use an on_attach function to only map the following keys
@@ -57,10 +57,8 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'gopls', 'tsserver', 'sumneko_lua' }
-
-local lspconfig = require('lspconfig')
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+for _, lsp in pairs(servers) do
+  require('lspconfig')[lsp].setup {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
