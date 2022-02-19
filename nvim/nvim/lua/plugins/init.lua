@@ -18,9 +18,7 @@ local packer = require('packer').startup(function(use)
     "folke/which-key.nvim",
     config = function()
       require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
+        -- empty configuration
       }
     end
   }
@@ -37,7 +35,17 @@ local packer = require('packer').startup(function(use)
     }
   }
 
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
+    config = function()
+      require('nvim-tree').setup {
+        -- empty configuration
+      }
+    end
+  }
 
   use { 'crispgm/nvim-go',
     requires = {
@@ -69,6 +77,7 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+
 -- Setup nvim-cmp.
 local cmp = require('cmp')
 
@@ -90,18 +99,6 @@ cmp.setup({
     { name = 'vsnip' },
     { name = 'buffer' },
   }
-})
-
--- nvim-tree
-vim.g.nvim_tree_show_icons = {
-  git = 0,
-  folders = 0,
-  files = 0,
-  folder_arrows = 0,
-}
-require('nvim-tree').setup({
-  disable_netrw       = false,
-  hijack_netrw        = false,
 })
 
 
