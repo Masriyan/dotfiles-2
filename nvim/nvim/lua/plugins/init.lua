@@ -69,13 +69,6 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
-local wk = require("which-key")
-
--- fzf-lua mapping
-wk.register({
-  ['<C-P>'] = {"<cmd>lua require('fzf-lua').files()<CR>", 'Fzf files', noremap = true, silent = true}
-})
-
 -- Setup nvim-cmp.
 local cmp = require('cmp')
 
