@@ -49,6 +49,25 @@ local on_attach = function(client, bufnr)
     ['gr'] = {'<cmd>lua vim.lsp.buf.references()<CR>', 'References'},
     ['<space>f'] = {'<cmd>lua vim.lsp.buf.formatting()<CR>', 'Format'},
   }, { buffer = bufnr })
+
+  -- Range Formatting With a Motion
+  -- https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#range-formatting-with-a-motion
+  function format_range_operator()
+    local old_func = vim.go.operatorfunc
+    _G.op_func_formatting = function()
+      local start = vim.api.nvim_buf_get_mark(bufnr, '[')
+      local finish = vim.api.nvim_buf_get_mark(bufnr, ']')
+      vim.lsp.buf.range_formatting({}, start, finish)
+      vim.go.operatorfunc = old_func
+      _G.op_func_formatting = nil
+    end
+    vim.go.operatorfunc = 'v:lua.op_func_formatting'
+    vim.api.nvim_feedkeys('g@', 'n', false)
+  end
+
+  wk.register({
+    gm = {'<cmd>lua format_range_operator()<CR>', 'Range formatting with a motion'},
+  })
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
