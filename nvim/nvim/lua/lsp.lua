@@ -1,3 +1,5 @@
+local wk = require('which-key')
+
 -- nvim-go
 -- First time only need to install quicktype with npm
 -- require('go').config.update_tool('quicktype', function(tool)
@@ -15,7 +17,15 @@ null_ls.setup({
   },
 })
 
-local nvim_lsp = require('lspconfig')
+
+-- Map following keys to no particular buffer
+-- See `:help vim.lsp.*` for documentation on any of the below functions
+wk.register({
+  ['<space>e'] = {'<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', 'Show line diagnostics'},
+  ['[d'] = {'<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', 'Go to diagnostic prev'},
+  [']d'] = {'<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', 'Go to diagnostic next'},
+  ['<space>q'] = {'<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', 'Set diagnostic loclist'},
+})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -24,7 +34,6 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local wk = require('which-key')
   wk.register({
     ['gD'] = {'<cmd>lua vim.lsp.buf.declaration()<CR>', 'Declaration'},
     ['gd'] = {'<cmd>lua vim.lsp.buf.definition()<CR>', 'Definition'},
@@ -38,10 +47,6 @@ local on_attach = function(client, bufnr)
     ['<space>rn'] = {'<cmd>lua vim.lsp.buf.rename()<CR>', 'Rename'},
     ['<space>ca'] = {'<cmd>lua vim.lsp.buf.code_action()<CR>', 'Code Action'},
     ['gr'] = {'<cmd>lua vim.lsp.buf.references()<CR>', 'References'},
-    ['<space>e'] = {'<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', 'Show line diagnostics'},
-    ['[d'] = {'<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', 'Go to diagnostic prev'},
-    [']d'] = {'<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', 'Go to diagnostic next'},
-    ['<space>q'] = {'<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', 'Set diagnostic loclist'},
     ['<space>f'] = {'<cmd>lua vim.lsp.buf.formatting()<CR>', 'Format'},
   }, { buffer = bufnr })
 end
@@ -51,9 +56,11 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'tsserver' }
+local servers = { 'gopls', 'tsserver', 'sumneko_lua' }
+
+local lspconfig = require('lspconfig')
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+  lspconfig[lsp].setup {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
