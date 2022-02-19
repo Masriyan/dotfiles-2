@@ -10,12 +10,23 @@ local packer = require('packer').startup(function(use)
   -- Plugins here
   use 'wbthomason/packer.nvim'
 
-  use { 'ibhagwan/fzf-lua',
-    requires = { 'vijaymarupudi/nvim-fzf' }
-  }
-
   use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
+  }
+
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
+  use { 'ibhagwan/fzf-lua',
+    requires = { 'vijaymarupudi/nvim-fzf' }
   }
 
   use { 'hrsh7th/nvim-cmp',
@@ -58,10 +69,12 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+local wk = require("which-key")
+
 -- fzf-lua mapping
-vim.api.nvim_set_keymap('n', '<c-P>',
-    "<cmd>lua require('fzf-lua').files()<CR>",
-    { noremap = true, silent = true })
+wk.register({
+  ['<C-P>'] = {"<cmd>lua require('fzf-lua').files()<CR>", 'Fzf files', noremap = true, silent = true}
+})
 
 -- Setup nvim-cmp.
 local cmp = require('cmp')
