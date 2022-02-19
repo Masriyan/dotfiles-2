@@ -17,6 +17,7 @@ wk.register({
   -- <leader>
   ['<leader>'] = {
     e = {'<cmd>NvimTreeToggle<CR>', ':NvimTreeToggle'},
+    t = {'<cmd>TroubleToggle<CR>', ':TroubleToggle'},
   },
   -- fzf-lua mappings
   ['<C-p>'] = {
