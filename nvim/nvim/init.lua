@@ -1,4 +1,5 @@
 require('plugins')
+require('lsp')
 
 -- Colorscheme
 local cmd = vim.cmd
