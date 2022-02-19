@@ -12,3 +12,4 @@ o.number = true
 o.textwidth = 80
 o.mouse = "a"
 o.colorcolumn = "80,120"
+o.smarttab = true
