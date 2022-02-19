@@ -24,6 +24,7 @@ wk.register({
   -- fzf-lua mappings
   ['<C-p>'] = {
     name = '+fzf-lua',
+    ['<CR>'] = {"<cmd>lua require('fzf-lua').builtin()<CR>", 'fzf-lua builtin commands'},
     b = {"<cmd>lua require('fzf-lua').buffers()<CR>", 'open buffers'},
     f = {"<cmd>lua require('fzf-lua').files()<CR>", 'find or fd on a path'},
     g = {"<cmd>lua require('fzf-lua').live_grep()<CR>", 'live grep current project'},
