@@ -53,12 +53,23 @@ local packer = require('packer').startup(function(use)
     end
   }
 
+  -- Languages
+  -- This section is for additional plugins to enhance experience with
+  -- programming languages
+
   use 'folke/lua-dev.nvim'
 
   use { 'crispgm/nvim-go',
     requires = {
       'nvim-lua/plenary.nvim',
       'nvim-lua/popup.nvim',
+    }
+  }
+
+  use { 'jose-elias-alvarez/nvim-lsp-ts-utils',
+    requires = {
+      'jose-elias-alvarez/null-ls.nvim',
+      'nvim-lua/plenary.nvim',
     }
   }
 
