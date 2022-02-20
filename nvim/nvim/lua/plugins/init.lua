@@ -14,6 +14,8 @@ local packer = require('packer').startup(function(use)
     run = ':TSUpdate'
   }
 
+  use 'lukas-reineke/indent-blankline.nvim'
+
   use {
     "folke/which-key.nvim",
     config = function()
@@ -132,6 +134,12 @@ require('nvim-treesitter.configs').setup {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
+}
+
+-- indent-blankline.nvim
+require("indent_blankline").setup {
+    show_current_context = true,
+    show_current_context_start = true,
 }
 
 
