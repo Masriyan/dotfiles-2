@@ -17,9 +17,9 @@ local packer = require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
 
   use {
-    "folke/which-key.nvim",
+    'folke/which-key.nvim',
     config = function()
-      require("which-key").setup {
+      require('which-key').setup {
         -- empty configuration
       }
     end
@@ -79,6 +79,8 @@ local packer = require('packer').startup(function(use)
     }
   }
 
+  -- Misc
+
   use 'folke/tokyonight.nvim'
 
   use {
@@ -121,12 +123,19 @@ local packer = require('packer').startup(function(use)
   }
 
   use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    'folke/trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require("trouble").setup {
+      require('trouble').setup {
         -- empty configuration
       }
+    end
+  }
+
+  use {
+    'klen/nvim-test',
+    config = function()
+      require('nvim-test').setup()
     end
   }
 
