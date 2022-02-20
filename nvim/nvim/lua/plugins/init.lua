@@ -68,7 +68,45 @@ local packer = require('packer').startup(function(use)
 
   use 'folke/tokyonight.nvim'
 
-  -- Lua
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('gitsigns').setup {
+	on_attach = function(bufnr)
+	  local wk = require('which-key')
+	  wk.register({
+            -- Navigation
+            [']c'] = {"&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", 'Gitsigns next hunk'},
+            ['[c'] = {"&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", 'Gitsigns prev hunk'},
+
+	    -- Actions
+            ['<leader>hs'] = {'<cmd>Gitsigns stage_hunk<CR>', 'Gitsigns stage hunk'},
+            ['<leader>hr'] = {'<cmd>Gitsigns reset_hunk<CR>', 'Gitsigns reset hunk'},
+            ['<leader>hS'] = {'<cmd>Gitsigns stage_buffer<CR>', 'Gitsigns stage buffer'},
+            ['<leader>hu'] = {'<cmd>Gitsigns undo_stage_hunk<CR>', 'Gitsigns undo stage hunk'},
+            ['<leader>hR'] = {'<cmd>Gitsigns reset_buffer<CR>', 'Gitsigns reset buffer'},
+            ['<leader>hp'] = {'<cmd>Gitsigns preview_hunk<CR>', 'Gitsigns preview hunk'},
+            ['<leader>hb'] = {'<cmd>lua require"gitsigns".blame_line{full=true}<CR>', 'Gitsigns blame line'},
+            ['<leader>tb'] = {'<cmd>Gitsigns toggle_current_line_blame<CR>', 'Gitsigns toggle current line blame'},
+            ['<leader>hd'] = {'<cmd>Gitsigns diffthis<CR>', 'Gitsigns diffthis'},
+            ['<leader>hD'] = {'<cmd>lua require"gitsigns".diffthis("~")<CR>', 'Gitsigns diffthis to HEAD'},
+            ['<leader>td'] = {'<cmd>Gitsigns toggle_deleted<CR>', 'Gitsigns toggle deleted'},
+	  }, { buffer = bufnr})
+
+	  wk.register({
+            ['<leader>hs'] = {'<cmd>Gitsigns stage_hunk<CR>', 'Gitsigns stage hunk'},
+            ['<leader>hr'] = {'<cmd>Gitsigns reset_hunk<CR>', 'Gitsigns reset hunk'},
+	  }, { buffer = bufnr, mode = 'v'})
+
+          -- Text object
+	  wk.register({['ih'] = {':<C-U>Gitsigns select_hunk<CR>', 'Gitsigns select hunk'}}, { buffer = bufnr, mode = 'o'})
+	  wk.register({['ih'] = {':<C-U>Gitsigns select_hunk<CR>', 'Gitsigns select hunk'}}, { buffer = bufnr, mode = 'x'})
+        end
+      }
+    end
+  }
+
   use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
