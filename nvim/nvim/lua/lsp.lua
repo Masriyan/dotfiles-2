@@ -27,9 +27,8 @@ wk.register({
   ['<space>q'] = {'<cmd>lua vim.diagnostic.setloclist()<CR>', 'Set diagnostic loclist'},
 })
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+-- Register keymaps via which key inside lsp servers on_attach
+local wk_register_on_attach = function(bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -68,6 +67,12 @@ local on_attach = function(client, bufnr)
   wk.register({
     gm = {'<cmd>lua format_range_operator()<CR>', 'Range formatting with a motion'},
   })
+end
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  wk_register_on_attach(bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -163,9 +168,11 @@ lspconfig.tsserver.setup({
     ts_utils.setup_client(client)
 
     -- no default maps, so you may want to define some here
-    local opts = { silent = true }
+    -- local opts = { silent = true }
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+    wk_register_on_attach(bufnr)
   end,
+  capabilities = capabilities,
 })
